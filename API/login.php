@@ -13,7 +13,7 @@
             FROM   users
             WHERE  username = ?
             AND    pw = ?
-        ")
+        ");
 
         $statement->bind_param("ss", $inData["username"], $inData["pw"]);
         $statement->execute();
