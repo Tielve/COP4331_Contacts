@@ -1,6 +1,6 @@
 <?php
     $inData = json_decode(file_get_contents('php://input'), true);
-    $connection = new mysqli("localhost", "test", "test", "contactmanagerdb");
+    $connection = new mysqli("localhost", "admin", "admin", "ContactManager");
 
     if ($connection->connect_error)
     {
