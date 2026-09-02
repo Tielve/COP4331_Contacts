@@ -20,14 +20,26 @@
         ");
         
         $statement->bind_param("ssssss", $uID, $fname, $lname, $phone, $email, $company);
-        $statement->execute();
-        $statement->close();
-        $connection->close();
-        returnWithoutError();
+        
+        try
+        {
+            $statement->execute();
+            returnSuccess($statement->insert_id);
+        }
+        catch(mysqli_sql_exception $exception)
+        {
+            returnWithError($exception->getMessage());
+        }
+        finally
+        {
+            $statement->close();
+            $connection->close();
+        }
     }
 
     function returnWithError($error)
     {
+        http_response_code(401); // unauthorized; invalid uID
         $returnValue = 
         '{
             "error" : "' . $error . '"
@@ -35,9 +47,13 @@
         sendResultInfoAsJson($returnValue);
     }
 
-    function returnWithoutError()
+    function returnSuccess($cID)
     {
-        sendResultInfoAsJson(null);
+        $returnValue =
+        '{
+            "cID" : "' . $cID . '"
+        }';
+        sendResultInfoAsJson($returnValue);
     }
 
     function sendResultInfoAsJson($object)
