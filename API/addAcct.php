@@ -1,10 +1,6 @@
 <?php
     $inputData = json_decode(file_get_contents('php://input'), true);//make json file front end gives us as useable
-    //---------------------------------------------------------------------------------
-    //Database guy, change below to have the correct credentials if it does not already
-    //Thank you!
-    //---------------------------------------------------------------------------------
-    $connection = new mysqli("localhost", "admin", "admin", "contactmanagerdb"); //connect to our database
+    $connection = new mysqli("localhost", "admin", "admin", "ContactManager"); //connect to our database
 
     if ($connection->connect_error)//if connect error
     {
