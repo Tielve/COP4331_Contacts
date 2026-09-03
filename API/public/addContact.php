@@ -1,12 +1,17 @@
 <?php
+    /*
+     * The following lines starting with "require_once" through "$connection"
+     * should appear at the top of every PHP file. This ensures the .env is 
+     * being used and that a connection to the database is established.
+     */
+
+    require_once __DIR__ . '/../vendor/autoload.php';
+    $dotEnv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+    $dotEnv->load();
+
     $inData = json_decode(file_get_contents('php://input'), true);
-    $connection = new mysqli("localhost", "admin", "admin", "ContactManager");
-    $uID = $inData["uID"];
-    $fname = $inData["fname"];
-    $lname = $inData["lname"];
-    $phone = $inData["phone"];
-    $email = $inData["email"];
-    $company = $inData["company"];
+    $connection = new mysqli($_ENV['DB_HOST'], $_ENV['DB_USER'],
+                             $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']);
 
     if ($connection->connect_error)
     {
@@ -15,11 +20,14 @@
     else
     {
         $statement = $connection->prepare("
-            INSERT INTO contacts(uID, fname, lname, phone, email, company)
+            INSERT INTO contacts(fname, lname, phone, email, company, uID)
             VALUES (?, ?, ?, ?, ?, ?)
         ");
         
-        $statement->bind_param("ssssss", $uID, $fname, $lname, $phone, $email, $company);
+        $statement->bind_param("sssssi",
+            $inData["fname"], $inData["lname"], $inData["phone"],
+            $inData["email"], $inData["company"], $inData["uID"]
+        );
         
         try
         {
@@ -39,7 +47,7 @@
 
     function returnWithError($error)
     {
-        http_response_code(401); // unauthorized; invalid uID
+        http_response_code(400);
         $returnValue = 
         '{
             "error" : "' . $error . '"
