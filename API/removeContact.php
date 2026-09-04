@@ -41,7 +41,7 @@
         try
         {
             $statement->execute();//excute
-            if($statement->affected_rows == 0){returnNothingDeleted($cID);}//if nothing was deleted, return that
+            if($statement->affected_rows == 0){returnWithError("Nothing was removed for cID ' . $cID . '");}//if nothing was deleted, return that
             else{returnSuccess($cID);}//return success
         }
         catch(mysqli_sql_exception $exception)
@@ -57,23 +57,14 @@
     }
 
     //returns the ID that was attempted to be delected, notify the error, and say removed was false
-    function returnNothingDeleted($cID)
-    {
-        $returnValue = '{ 
-            "cID" : "' . $cID . '", 
-            "Error" : "Nothing was removed for cID ' . $cID . '",  
-            "Removed" : false 
-        }';
-        sendResultInfoAsJson($returnValue);
-    }
 
     //returns error, with removed being false
     function returnWithError($error)
     {
-        $returnValue = 
-        '{
-            "error" : "' . $error . '",
-            "Removed": false
+        
+        $returnValue = '{
+            "cID" : "' . 0 . '",
+            "error" : "' . $error . '"
         }';
         sendResultInfoAsJson($returnValue);
     }
@@ -83,8 +74,7 @@
     {       
         $returnValue =
         '{
-            "cID" : "' . $cID . '",
-            "Removed" : true
+            "cID" : "' . $cID . '"
         }';
         sendResultInfoAsJson($returnValue);
     }
