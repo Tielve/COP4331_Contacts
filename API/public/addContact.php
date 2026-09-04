@@ -50,6 +50,7 @@
         http_response_code(400);
         $returnValue = 
         '{
+            "cID" : 0,
             "error" : "' . $error . '"
         }';
         sendResultInfoAsJson($returnValue);
