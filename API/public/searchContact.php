@@ -24,7 +24,7 @@
         $searchResults = ""; // returned search results in json format
 
         $statement = $connection->prepare("
-            SELECT fname, lname, phone, email, company
+            SELECT cID, fname, lname, phone, email, company
             FROM   contacts
             WHERE  uID = ?
             AND    (   fname   LIKE ?
@@ -60,6 +60,7 @@
 
             $searchResults .= 
             '{ 
+                "cID" : "' . $row["cID"] . '", 
                 "fname" : "' . $row["fname"] . '", 
                 "lname" : "' . $row["lname"] . '",
                 "phone" : "' . $row["phone"] . '",
