@@ -15,68 +15,98 @@
 
   <body>
     <main class="auth-page">
-      <h1>Contact Manager</h1>
-      <!-- Buttons for switching between login or registor form-->
-      <div class = "form-selector">
-        <button id="show-login-button" type="button" aria-pressed="true">
-          Login
-        </button>
-
-        <button id="show-register-button" type="button" aria-pressed="false">
-          Register
-        </button>
-      </div>
-
-      <!-- Login form -->
-       <form id="login-form">
-        <h2>Log in</h2>
+      <section class="auth-card">
+        <h1 class="auth-title">Contact Manager</h1>
         
-        <label for="login-username">Username</label>
-        <input
-          type="text"
-          id="login-username"
-          name="username"
-          autocomplete="username"
-          required
-        >
-        
-        <label for="login-password">Password</label>
-        <input
-          type="password"
-          id="login-password"
-          name="password"
-          autocomplete="current-password"
-          required
-        >
-        
-        <button type="submit">Login</button>
-       </form>
+        <!-- Buttons for switching between login or registor form-->
+        <div class = "form-selector">
+          <button 
+            id="show-login-button"
+            class="btn btn-outline-primary"
+            type="button" 
+            aria-pressed="true"
+          >
+            Login
+          </button>
 
-       <!-- Registration form(stays hidden until selected) -->
-      <form id="register-form" hidden>
-        <h2>Create an Account</h2>
+          <button 
+            id="show-register-button" 
+            class="btn btn-outline-primary"
+            type="button" 
+            aria-pressed="false"
+          >
+            Register
+          </button>
+        </div>
 
-        <label for="register-username">Username</label>
-        <input
-          type="text"
-          id="register-username"
-          name="username"
-          autocomplete="username"
-          required
-        >
+        <!-- Login form -->
+        <form id="login-form" class="auth-form">
+          <h2>Log in</h2>
 
-        <label for="register-password">Password</label>
-        <input
-          type="password"
-          id="register-password"
-          name="password"
-          autocomplete="new-password"
-          required
-        >
-        <button type="submit">Create Account</button>
-      </form>
+          <div class="form-group">
+            <label class="form-label" for="login-username">Username</label>
+          
+          
+          <input
+            class="form-control"
+            type="text"
+            id="login-username"
+            name="username"
+            autocomplete="username"
+            required
+          >
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+          
+            <input
+              class="form-control"
+              type="password"
+              id="login-password"
+              name="password"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+
+          <button class="btn btn-primary submit-button" type="submit">Login</button>
+        </form>
+
+        <!-- Registration form(stays hidden until selected) -->
+        <form id="register-form" class="auth-form" hidden>
+          <h2>Create an Account</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="register-username">Username</label>
+
+            <input
+              class="form-control"
+              type="text"
+              id="register-username"
+              name="username"
+              autocomplete="username"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="register-password">Password</label>
+          
+            <input
+              class="form-control"
+              type="password"
+              id="register-password"
+              name="password"
+              autocomplete="new-password"
+              required
+            >
+          </div>
+
+          <button class="btn btn-primary submit-button" type="submit">Create Account</button>
+        </form>
+      </section>
     </main>
-
     <script src = "js/auth.js"></script>
   </body>
 </html>
