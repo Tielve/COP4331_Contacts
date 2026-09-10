@@ -48,6 +48,30 @@
         
         <button type="submit">Login</button>
        </form>
+
+       <!-- Registration form(stays hidden until selected) -->
+      <form id="register-form" hidden>
+        <h2>Create an Account</h2>
+
+        <label for="register-username">Username</label>
+        <input
+          type="text"
+          id="register-username"
+          name="username"
+          autocomplete="username"
+          required
+        >
+
+        <label for="register-password">Password</label>
+        <input
+          type="password"
+          id="register-password"
+          name="password"
+          autocomplete="new-password"
+          required
+        >
+        <button type="submit">Create Account</button>
+      </form>
     </main>
   </body>
 </html>
