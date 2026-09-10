@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  background-color: white;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  padding: 32px; 
+  background-color:white;
+  border-radius:12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.form-selector {
+  display: flex;
+  gap: 12px;
+  margin-bottom:24px;
+}
+
+.form-selector .btn {
+  flex: 1;
+}
+
+.auth-form h2 {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.submit-button {
+  width: 100%;
+}
+
+/* shows which form is selected */
+.form-selector .btn[aria-pressed="true"] {
+  color:white; 
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
