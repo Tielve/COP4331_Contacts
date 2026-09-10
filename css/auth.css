@@ -13,6 +13,7 @@ body {
 
 .auth-card {
   width: 100%;
+  max-width: 420px;
   padding: 32px; 
   background-color:white;
   border-radius:12px;
