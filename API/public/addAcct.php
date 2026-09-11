@@ -21,7 +21,7 @@
     {
         $toRun = $connection->prepare("INSERT INTO users (username,pw) VALUES (?,?) ");//create the insert statement with placeholder
 
-        $toRun->bind_param("ss", $inputData["username"], $inputData["pw"]);//put the actual values from inputdata into the sql statment
+        $toRun->bind_param("ss", $inData["username"], $inData["pw"]);//put the actual values from inputdata into the sql statment
         
         try
         {
