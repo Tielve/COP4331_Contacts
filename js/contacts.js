@@ -166,6 +166,33 @@ contactForm.addEventListener("submit", async function (event) {
     const email = document.getElementById("contact-email").value.trim();
     const company = document.getElementById("contact-company").value.trim();
 
+    // update the contact when the form is in edit mode
+    if (editingContactID !== null) {
+        const updated = await updateContact(editingContactID, fname, lname, phone, email, company);
+
+        if (!updated) {
+            return;
+        }
+
+        // return to add mode
+        editingContactID = null;
+        contactForm.reset();
+        contactModalLabel.textContent = "Add Contact";
+        saveContactButton.textContent = "Save Contact";
+
+        // display updated contacts
+        await loadContacts(searchInput.value.trim());
+
+        // close popup
+        const modal = bootstrap.Modal.getInstance(contactModalElement);
+
+        if (modal) {
+            modal.hide();
+        }
+        
+        return;
+    }
+
     try {
         const response = await fetch(
             "http://192.241.156.39/API/addContact.php",
