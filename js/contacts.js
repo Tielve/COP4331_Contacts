@@ -3,6 +3,12 @@ const contactsTableBody = document.getElementById("contacts-table-body");
 const contactForm = document.getElementById("contact-form");
 const searchInput = document.getElementById("search-input");
 const logoutButton = document.getElementById("logout-button");
+const addContactButton = document.getElementById("add-contact-button");
+const contactModalElement = document.getElementById("contact-modal");
+const contactModalLabel = document.getElementById("contact-modal-label");
+const saveContactButton = contactForm.querySelector('button[type="submit"]');
+let editingContactID = null;
+
 const storedUserID = sessionStorage.getItem("uID");
 const userID = Number(storedUserID);
 
@@ -181,11 +187,28 @@ contactsTableBody.addEventListener("click", function (event) {
 
     // Edit
     if (button.classList.contains("edit-button")) {
-        const contactID = button.dataset.id;
+        const contactID = Number(button.dataset.id);
+        const row = button.closest("tr");
         console.log("Edit contact:", contactID);
 
-        // Edit
+        // remember which contact is being edited
+        editingContactID = contactID;
 
+        // copy existing contact info into the form
+        document.getElementById("contact-fname").value = row.cells[0].textContent.trim();
+        document.getElementById("contact-lname").value = row.cells[1].textContent.trim();
+        document.getElementById("contact-phone").value = row.cells[2].textContent.trim();
+        document.getElementById("contact-email").value = row.cells[3].textContent.trim();
+        document.getElementById("contact-company").value = row.cells[4].textContent.trim();
+
+        // change the popup to edit mode
+        contactModalLabel.textContent = "Edit Contact";
+        saveContactButton.textContent = "Save Changes";
+
+        // open the popup
+        const modal = bootstrap.Modal.getOrCreateInstance(contactModalElement);
+
+        modal.show();
     }
 
     // Delete
