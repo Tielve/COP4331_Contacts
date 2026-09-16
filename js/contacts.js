@@ -156,6 +156,14 @@ searchInput.addEventListener("input", function () {
     loadContacts(search);
 });
 
+// clear old edit information before adding a contact
+addContactButton.addEventListener("click", function () {
+    editingContactID = null;
+    contactForm.reset();
+    contactModalLabel.textContent = "Add Contact";
+    saveContactButton.textContent = "Save Contact";
+});
+
 // Add
 contactForm.addEventListener("submit", async function (event) {
 
@@ -189,7 +197,7 @@ contactForm.addEventListener("submit", async function (event) {
         if (modal) {
             modal.hide();
         }
-        
+
         return;
     }
 
