@@ -63,6 +63,48 @@ async function loadContacts(search) {
     }
 }
 
+// send edited contact to API
+async function updateContact(contactID, fname, lname, phone, email, company) {
+    try {
+        const response = await fetch("http://192.241.156.39/API/editContact.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    cID: Number(contactID),
+                    fname: fname,
+                    lname: lname,
+                    phone: phone,
+                    email: email,
+                    company: company,
+                    uID: userID
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(
+                "Edit failed:",
+                data.error
+            );
+
+            return false;
+        }
+
+        console.log("Contact updated:", data.cID);
+        return true;
+
+    } catch (error) {
+        console.error("Edit failed:", error);
+        return false;
+    }
+}
+
+
 // Display contacts
 function displayContacts(contacts) {
 
