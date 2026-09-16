@@ -3,11 +3,17 @@ const contactsTableBody = document.getElementById("contacts-table-body");
 const contactForm = document.getElementById("contact-form");
 const searchInput = document.getElementById("search-input");
 const logoutButton = document.getElementById("logout-button");
-const userID = sessionStorage.getItem("uID");
+const storedUserID = sessionStorage.getItem("uID");
+const userID = Number(storedUserID);
 
-// Load contacts upon page opening
-loadContacts("");
-
+// redirect anyone who has not logged in
+if (storedUserID === null || !Number.isInteger(userID) || userID <= 0) {
+    sessionStorage.removeItem("uID");
+    window.location.replace("index.html");
+} else {
+    // load contacts if user exists
+    loadContacts("");
+}
 // Search
 async function loadContacts(search) {
 
@@ -240,5 +246,5 @@ async function deleteContact(contactID) {
 // Logout
 logoutButton.addEventListener("click", function () {
     sessionStorage.removeItem("uID");
-    window.location.href = "index.html";
+    window.location.replace("index.html"); // fixed: make sure user can't use the back button to return to this page
 });
