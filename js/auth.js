@@ -49,14 +49,23 @@ loginForm.addEventListener("submit", async (event) => {
     });
 
     const data = await response.json();
-    if(!response.ok) {
-      console.log(data.error);
+    if (!response.ok || data.error) {
+      console.error("Login failed:", data.error);
+      sessionStorage.removeItem("uID");
       return;
     }
 
-    console.log("Login Succesful: ", data);
-    // redirect user to contacts page
-    // window.location.href = "contacts.html";
+    const userID = Number(data.id);
+
+    if (!Number.isInteger(userID) || userID <= 0) {
+      console.error("Login failed: API did not return a valid user ID.");
+      sessionStorage.removeItem("uID");
+      return;
+    }
+    sessionStorage.setItem("uID", String(userID));
+
+    console.log("Login successful:", data);
+    window.location.href = "contacts.html";
   } catch (error) {
     console.error("Login failed: ", error);
   }
