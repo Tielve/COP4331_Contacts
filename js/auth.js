@@ -36,7 +36,7 @@ loginForm.addEventListener("submit", async (event) => {
   const password = document.getElementById("login-password").value;
 
   try {
-    const response = await fetch("http://192.241.156.39/API/login.php", {
+    const response = await fetch("http://cop4331group13.site/API/login.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ registerForm.addEventListener("submit", async (event) => {
   const password = document.getElementById("register-password").value;
 
   try {
-    const response = await fetch("http://192.241.156.39/API/addAcct.php", {
+    const response = await fetch("http://cop4331group13.site/API/addAcct.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

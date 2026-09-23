@@ -25,7 +25,7 @@ async function loadContacts(search) {
 
     try {
         const response = await fetch(
-            "http://192.241.156.39/API/searchContact.php",
+            "http://cop4331group13.site/API/searchContact.php",
             {
                 method: "POST",
                 headers: {
@@ -66,7 +66,7 @@ async function loadContacts(search) {
 // send edited contact to API
 async function updateContact(contactID, fname, lname, phone, email, company) {
     try {
-        const response = await fetch("http://192.241.156.39/API/editContact.php", {
+        const response = await fetch("http://cop4331group13.site/API/editContact.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -305,7 +305,7 @@ async function deleteContact(contactID) {
     }
     try {
         const response = await fetch(
-            "http://192.241.156.39/API/removeContact.php",
+            "http://cop4331group13.site/API/removeContact.php",
             {
                 method: "POST",
                 headers: {
